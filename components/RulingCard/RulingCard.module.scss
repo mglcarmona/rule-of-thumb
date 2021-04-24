@@ -1,0 +1,101 @@
+.card {
+  height: 25rem;
+  min-width: 25rem;
+  padding-top: 56px;
+  box-sizing: border-box;
+  background-color: tomato;
+  color: var(--color-white);
+  font-weight: 400;
+  position: relative;
+
+  margin-right: 1rem;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.heroBackground {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  padding: 0 3rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.0001) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.name {
+  height: 74px;
+  margin: 0 -0.5rem 0.5rem;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+
+  span {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.summary {
+  height: 3rem;
+  margin-bottom: 1rem;
+
+  span {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.vote {
+  font-weight: 700;
+  font-size: 1rem;
+  font-size: 14px;
+  display: block;
+  margin-left: auto;
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.voteButton {
+  color: var(--color-white);
+  width: 9rem;
+  height: 3rem;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  margin-left: auto;
+  display: inline-block;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
