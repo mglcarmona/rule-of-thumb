@@ -1,5 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { checkBearerAuth, runMiddleware } from '../../lib/middlewares';
 
-export default (req, res) => {
-  res.status(200).json({ name: 'John Doe' })
-}
+export default async (req, res) => {
+  await runMiddleware(req, res, checkBearerAuth);
+  res.status(200).json({ name: 'John Doe' });
+};
