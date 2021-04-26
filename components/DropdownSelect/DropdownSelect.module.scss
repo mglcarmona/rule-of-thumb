@@ -1,0 +1,32 @@
+.container {
+  display: inline-block;
+  position: relative;
+
+  ul {
+    position: absolute;
+    top: 2rem;
+    z-index: 1;
+  }
+}
+
+.button,
+.option {
+  background-color: var(--color-white);
+  font-size: 0.75rem;
+  box-sizing: border-box;
+  width: 131px;
+  height: 2rem;
+  border: 2px solid var(--color-darker-gray);
+  cursor: pointer;
+}
+
+.option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 0;
+}
+
+.selected {
+  background-color: var(--color-light-gray);
+}

@@ -1,0 +1,48 @@
+.bar {
+  font-size: 18px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2em;
+  display: flex;
+  .positive,
+  .negative {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.positive {
+  justify-content: flex-start;
+  background: rgba(60, 187, 180, 0.6);
+  img {
+    margin-left: 1em;
+    margin-right: 0.5em;
+  }
+}
+
+.negative {
+  flex-grow: 1;
+  justify-content: flex-end;
+  background: rgba(249, 173, 29, 0.6);
+  img {
+    margin-left: 0.5em;
+    margin-right: 1em;
+  }
+}
+
+:import('../RulingCard/RulingCard.module.scss') {
+  list: list;
+}
+
+.list .bar {
+  // @media all and (min-width: 768px) {
+  //   height: 142px;
+  // }
+
+  @media all and (min-width: 1100px) {
+    font-size: 27px;
+  }
+}
