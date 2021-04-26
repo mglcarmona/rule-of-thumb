@@ -1,43 +1,83 @@
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { VOTE_TYPES } from '../../contants';
+import ThumbButton from '../ThumbButton';
+import VotesGaugeBar from '../VotesGaugeBar';
 import styles from './RulingCard.module.scss';
 
-export default function RulingCard() {
+const MojorityIcon = (props) => {
+  const { hasPositiveMojority } = props;
+  const thumbKind = hasPositiveMojority ? 'up' : 'down';
   return (
-    <div className={styles.card}>
+    <div className="icon-badge" aria-label={`thumbs ${thumbKind}`}>
+      <img src={`/img/thumbs-${thumbKind}.svg`} alt={`thumbs ${thumbKind}`} />
+    </div>
+  );
+};
+
+export default function RulingCard(props) {
+  const { data, isList, selectVote, selectedVote, index, vote, reset } = props;
+
+  const handleVoteAction = data.voted ? () => reset(index) : vote;
+
+  const hasPositiveMojority = data.votes.positive > data.votes.negative;
+  const canVote = selectedVote || data.voted;
+  const lastUpdate = formatDistanceToNow(new Date(data.lastUpdated));
+  return (
+    <div
+      className={`${styles.card} ${isList && styles.list}`}
+      role="ruling-card"
+    >
+      <MojorityIcon hasPositiveMojority={hasPositiveMojority} />
       <img
         className={styles.heroBackground}
-        srcSet="/kanye.png 750w, /kanye.@2x.png 1440w"
+        srcSet={`${data.picture} 750w, ${data.picture} 1440w`}
         sizes="(min-width: 750px) 1440px, 100vw"
-        src="/kanye.png"
-        alt="Kanye West"
+        src={data.picture}
+        alt={data.name}
       />
       <div className={styles.content}>
-        <div className={styles.name}>
-          <span>Cristina Fernández de Kirchner</span>
-        </div>
         <div className={styles.summary}>
-          <span>
-            Lorem ipsum is placeholder text commonly used in the graphic, print
-          </span>
+          <div className={styles.name}>
+            <p>{data.name}</p>
+          </div>
+          <p className={styles.description}>{data.description}</p>
         </div>
-        <span className={styles.vote}>Thank you for your vote!</span>
-        <div style={{ marginLeft: 'auto' }}>
-          <button
-            className="icon-button icon-button--small"
-            aria-label="thumbs up"
-            style={{ marginRight: '1rem' }}
-          >
-            <img src="/img/thumbs-up.svg" alt="thumbs up" />
-          </button>
-          <button
-            className="icon-button icon-button--small"
-            aria-label="thumbs down"
-            style={{ marginRight: '1rem' }}
-          >
-            <img src="/img/thumbs-down.svg" alt="thumbs down" />
-          </button>
-          <button className={styles.voteButton}>Vote Now</button>
+
+        <div className={styles.voting}>
+          <span className={styles.vote}>
+            {data.voted
+              ? 'Thank you for your vote!'
+              : `${lastUpdate} in ${data.category}`}
+          </span>
+          <div className={styles.buttonsRow}>
+            {!data.voted && (
+              <>
+                <ThumbButton
+                  thumbKind="up"
+                  isSelected={selectedVote === VOTE_TYPES.POSITIVE}
+                  onClick={() => selectVote(VOTE_TYPES.POSITIVE, index)}
+                />
+                <ThumbButton
+                  thumbKind="down"
+                  isSelected={selectedVote === VOTE_TYPES.NEGATIVE}
+                  onClick={() => selectVote(VOTE_TYPES.NEGATIVE, index)}
+                />
+              </>
+            )}
+            <button
+              className={styles.voteButton}
+              onClick={handleVoteAction}
+              disabled={!canVote}
+            >
+              {data.voted ? 'Vote Again' : 'Vote Now'}
+            </button>
+          </div>
         </div>
       </div>
+      <VotesGaugeBar
+        positive={data.votes.positive}
+        negative={data.votes.negative}
+      />
     </div>
   );
 }

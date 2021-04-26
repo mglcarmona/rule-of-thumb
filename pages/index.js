@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import SpeakOut from '../components/Banners/SpeakOut';
 import SubmitAName from '../components/Banners/SubmitAName';
 import Divider from '../components/Divider';
-import RulingCard from '../components/RulingCard';
+import Rulings from '../containers/Rulings';
 
 export default function Home() {
   return (
@@ -14,25 +14,7 @@ export default function Home() {
       <Header />
       <div className="max-centered">
         <SpeakOut />
-        <main
-          role="main"
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'nowrap',
-            overflowX: 'scroll',
-          }}
-        >
-          <RulingCard />
-          <RulingCard />
-          <RulingCard />
-          <RulingCard />
-          <RulingCard />
-          <RulingCard />
-          <RulingCard />
-          <RulingCard />
-          <RulingCard />
-        </main>
+        <Rulings />
         <SubmitAName />
         <Divider />
         <Footer />
